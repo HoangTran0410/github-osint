@@ -19,7 +19,7 @@ function App() {
     setIsLoading(true);
     try {
       const userData = await fetchUser(username);
-      
+
       setCurrentUser(userData);
       setCurrentScreen('list');
     } catch (error) {
@@ -48,31 +48,26 @@ function App() {
 
   return (
     <div className="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden bg-background-light dark:bg-background-dark text-slate-900 dark:text-white font-display">
-       <Header onGoHome={handleGoHome} />
-       
-       <div className="flex-grow flex flex-col">
-        {currentScreen === 'search' && (
-            <SearchScreen onSearch={handleSearch} isLoading={isLoading} />
-        )}
+      <Header onGoHome={handleGoHome} />
+
+      <div className="flex-grow flex flex-col">
+        {currentScreen === 'search' && <SearchScreen onSearch={handleSearch} isLoading={isLoading} />}
 
         {currentScreen === 'list' && currentUser && (
-            <EventListScreen 
-                user={currentUser} 
-                onSelectEvent={handleSelectEvent}
-                onSearch={handleSearch}
-                isLoading={isLoading}
-            />
+          <EventListScreen
+            user={currentUser}
+            onSelectEvent={handleSelectEvent}
+            onSearch={handleSearch}
+            isLoading={isLoading}
+          />
         )}
 
         {currentScreen === 'detail' && selectedEvent && (
-            <EventDetailScreen 
-                event={selectedEvent} 
-                onBack={handleGoBackToList} 
-            />
+          <EventDetailScreen event={selectedEvent} onBack={handleGoBackToList} />
         )}
-       </div>
+      </div>
 
-       <Footer />
+      <Footer />
     </div>
   );
 }

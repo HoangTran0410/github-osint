@@ -24,7 +24,7 @@ function GenericDataTab<T>({
   searchFunction,
   filterOptions = [],
   getFilterValue,
-  emptyMessage = "No items found.",
+  emptyMessage = 'No items found.',
   onItemClick
 }: GenericDataTabProps<T>) {
   const [items, setItems] = useState<T[]>([]);
@@ -32,7 +32,7 @@ function GenericDataTab<T>({
   const [error, setError] = useState<string | null>(null);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
-  
+
   // Filter/Search State
   const [searchQuery, setSearchQuery] = useState('');
   const [activeFilter, setActiveFilter] = useState('All');
@@ -51,11 +51,11 @@ function GenericDataTab<T>({
     try {
       setLoading(true);
       const newItems = await fetchFn(username, pageNumber);
-      
+
       if (newItems.length === 0) {
         setHasMore(false);
       } else {
-        setItems(prev => pageNumber === 1 ? newItems : [...prev, ...newItems]);
+        setItems((prev) => (pageNumber === 1 ? newItems : [...prev, ...newItems]));
       }
     } catch (err) {
       setError('Failed to load data. API rate limit might be exceeded.');
@@ -72,7 +72,7 @@ function GenericDataTab<T>({
   };
 
   // Client-side filtering
-  const displayedItems = items.filter(item => {
+  const displayedItems = items.filter((item) => {
     const matchesSearch = searchFunction(item, searchQuery);
     const matchesFilter = activeFilter === 'All' || (getFilterValue && getFilterValue(item) === activeFilter);
     return matchesSearch && matchesFilter;
@@ -87,31 +87,33 @@ function GenericDataTab<T>({
 
       <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-between">
         <div className="flex-grow">
-             <label className="flex flex-col h-10 w-full">
-                  <div className="flex w-full flex-1 items-stretch rounded-lg h-full">
-                    <div className="text-slate-500 dark:text-[#92adc9] flex border-none bg-slate-100 dark:bg-[#233648] items-center justify-center pl-3 rounded-l-lg border-r-0">
-                      <span className="material-symbols-outlined text-lg">search</span>
-                    </div>
-                    <input 
-                        className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-slate-800 dark:text-white focus:outline-0 focus:ring-0 border-none bg-slate-100 dark:bg-[#233648] focus:border-none h-full placeholder:text-slate-500 placeholder:dark:text-[#92adc9] px-3 rounded-l-none border-l-0 pl-2 text-sm font-normal leading-normal" 
-                        placeholder="Search loaded items..." 
-                        value={searchQuery}
-                        onChange={(e) => setSearchQuery(e.target.value)}
-                    />
-                  </div>
-                </label>
+          <label className="flex flex-col h-10 w-full">
+            <div className="flex w-full flex-1 items-stretch rounded-lg h-full">
+              <div className="text-slate-500 dark:text-[#92adc9] flex border-none bg-slate-100 dark:bg-[#233648] items-center justify-center pl-3 rounded-l-lg border-r-0">
+                <span className="material-symbols-outlined text-lg">search</span>
+              </div>
+              <input
+                className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-slate-800 dark:text-white focus:outline-0 focus:ring-0 border-none bg-slate-100 dark:bg-[#233648] focus:border-none h-full placeholder:text-slate-500 placeholder:dark:text-[#92adc9] px-3 rounded-l-none border-l-0 pl-2 text-sm font-normal leading-normal"
+                placeholder="Search loaded items..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+            </div>
+          </label>
         </div>
-        
+
         {filterOptions.length > 0 && (
           <div className="w-full sm:w-auto min-w-[150px]">
-            <select 
-              value={activeFilter} 
+            <select
+              value={activeFilter}
               onChange={(e) => setActiveFilter(e.target.value)}
               className="form-select w-full h-10 bg-slate-100 dark:bg-[#233648] border-none text-slate-800 dark:text-white rounded-lg text-sm focus:ring-primary focus:border-primary cursor-pointer px-3"
             >
               <option value="All">All Types</option>
-              {filterOptions.map(opt => (
-                  <option key={opt} value={opt}>{opt}</option>
+              {filterOptions.map((opt) => (
+                <option key={opt} value={opt}>
+                  {opt}
+                </option>
               ))}
             </select>
           </div>
@@ -125,31 +127,31 @@ function GenericDataTab<T>({
       )}
 
       <div className="flex flex-col gap-4">
-        {displayedItems.map(item => (
-            <div key={itemKey(item)} onClick={() => onItemClick && onItemClick(item)}>
-                {renderItem(item)}
-            </div>
+        {displayedItems.map((item) => (
+          <div key={itemKey(item)} onClick={() => onItemClick && onItemClick(item)}>
+            {renderItem(item)}
+          </div>
         ))}
-        
+
         {!loading && displayedItems.length === 0 && !error && (
-            <div className="text-center py-10 text-slate-500 dark:text-[#92adc9]">
-                {items.length === 0 ? emptyMessage : "No items match your search filters."}
-            </div>
+          <div className="text-center py-10 text-slate-500 dark:text-[#92adc9]">
+            {items.length === 0 ? emptyMessage : 'No items match your search filters.'}
+          </div>
         )}
 
         {loading && (
-             <div className="flex justify-center py-6">
-                <span className="material-symbols-outlined animate-spin text-primary text-3xl">progress_activity</span>
-             </div>
+          <div className="flex justify-center py-6">
+            <span className="material-symbols-outlined animate-spin text-primary text-3xl">progress_activity</span>
+          </div>
         )}
 
         {!loading && hasMore && items.length > 0 && (
-             <button 
-                onClick={handleLoadMore}
-                className="self-center mt-4 px-6 py-2 bg-slate-200 dark:bg-[#233648] hover:bg-slate-300 dark:hover:bg-[#2f4052] text-slate-700 dark:text-white rounded-full text-sm font-medium transition-colors"
-             >
-                Load More
-             </button>
+          <button
+            onClick={handleLoadMore}
+            className="self-center mt-4 px-6 py-2 bg-slate-200 dark:bg-[#233648] hover:bg-slate-300 dark:hover:bg-[#2f4052] text-slate-700 dark:text-white rounded-full text-sm font-medium transition-colors"
+          >
+            Load More
+          </button>
         )}
       </div>
     </div>
