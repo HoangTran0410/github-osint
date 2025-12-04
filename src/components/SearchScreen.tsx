@@ -60,7 +60,7 @@ const SearchScreen: React.FC<SearchScreenProps> = ({ onSearch, isLoading }) => {
           <p className="text-sm text-slate-500 dark:text-white/50 mb-4">Or try with one of these profiles:</p>
           <div className="flex justify-center items-center gap-4 flex-wrap">
             <button
-              onClick={() => onSearch('linus-torvalds')}
+              onClick={() => onSearch('torvalds')}
               className="flex items-center gap-2 bg-slate-200 dark:bg-white/5 px-3 py-1.5 rounded-full hover:bg-slate-300 dark:hover:bg-white/10 transition-colors"
             >
               <img
