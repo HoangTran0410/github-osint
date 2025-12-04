@@ -1,0 +1,5 @@
+{
+  "name": "GitHub OSINT",
+  "description": "A tool to analyze public GitHub activity for OSINT purposes, featuring user search, event feeds, and detailed event analysis.",
+  "requestFramePermissions": []
+}
