@@ -10,6 +10,14 @@ export default defineConfig(({ mode }) => {
     build: {
       outDir: "../",
       emptyOutDir: false,
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            'react-vendor': ['react', 'react-dom'],
+            'moment-vendor': ['moment'],
+          },
+        },
+      },
     },
     server: {
       port: 3000,
