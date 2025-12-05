@@ -9,8 +9,9 @@ const Footer: React.FC = () => {
       <a
         className="text-sm text-primary/80 hover:text-primary transition-colors mt-2 inline-block"
         href="https://github.com/hoangtran0410/github-osint"
+        target="_blank"
       >
-        View source on GitHub
+        View on GitHub
       </a>
     </footer>
   );

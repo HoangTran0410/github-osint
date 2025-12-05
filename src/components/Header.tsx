@@ -27,8 +27,12 @@ const Header: React.FC<HeaderProps> = ({ onGoHome }) => {
       </div>
       <div className="flex flex-1 justify-end gap-8">
         <div className="flex items-center gap-9">
-          <a className="text-white/80 text-sm font-medium leading-normal hover:text-white transition-colors" href="#">
-            About
+          <a
+            className="text-white/80 text-sm font-medium leading-normal hover:text-white transition-colors"
+            href="https://github.com/hoangtran0410/github-osint"
+            target="_blank"
+          >
+            Source code
           </a>
         </div>
       </div>
